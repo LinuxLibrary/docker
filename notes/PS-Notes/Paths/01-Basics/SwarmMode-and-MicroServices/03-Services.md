@@ -39,3 +39,13 @@ Ex:
 
 - If in somecase any of the above manager or worker nodes went down accidentally due to power issues or anything else they can be picked up automatically into the pool once they are available.
 - But that host won't get any of the existing tasks onto it until we scale the service with more number of instances/replicas. Means it does not rebalance any existance tasks and only can pick up the new tasks.
+- Now if we are looking to update the service from one version of software to the latest or some other specific we can use the `docker service update` command for doing that.
+- But if we have multiple containers running for that specific service we can use `--update-parallelism` and `--update-delay` with the image name and version that we want to update to.
+	- `--update-parallelism`: This option will tell the swarm how many containers need to be updated at a single time in parallel. This option is pretty suitable for the rolling updates
+	- `--update-delay`: This option will tell the swarm how much time it need to wait between the concurrent updates
+	
+	```
+	Syntax: docker service update --image "IMAGE_NAME:NEW_IMAGE_VERSION" --update-parallelism <NO_OF_CONTAINERS_FOR_PARALLEL_UPDATE> --update-delay <DELAY_BETWEEN_CONCURRENT_UPDATES>
+	
+	# docker service update --image nigelpoulton/pluralsight-docker-ci:v2 --update-parallelism 2 --update-delay 10s
+	```
