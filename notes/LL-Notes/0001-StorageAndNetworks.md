@@ -18,6 +18,10 @@
 - To use the storage provider we need to create the following config
 
 	```
+	# vi /etc/rexray/rexray.yml
+	```
+
+	```
 	libstorage:
 	  service: rbd
 	  server:
